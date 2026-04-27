@@ -14,14 +14,129 @@
 
    <link rel="stylesheet" href="css/glyphicones.css">
     <link rel="stylesheet" href="css/styles.css">
-    <STYLE>
-        
-        *{
-            color:green;
-        }
-        
-        
-    </STYLE>
+   /* Reset بسيط */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* خلفية عامة */
+body {
+    background: linear-gradient(to right, #1e1e2f, #2c3e50);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+/* Navbar */
+.navbar {
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.navbar h1 {
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Links */
+.nav-link {
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: orange !important;
+    transform: scale(1.05);
+}
+
+/* Carousel */
+.carousel {
+    margin-top: 20px;
+    background: #000;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.carousel img {
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.carousel img:hover {
+    transform: scale(1.05);
+}
+
+.carousel-caption {
+    background: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Form section */
+section.bg-dark {
+    border-radius: 15px;
+    margin-top: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+form input {
+    border-radius: 10px !important;
+    border: none;
+    padding: 10px;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 25px;
+    padding: 8px 20px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: orange;
+    color: black;
+    transform: scale(1.05);
+}
+
+/* Table */
+.table {
+    background: white;
+    color: black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.table img {
+    border-radius: 10px;
+}
+
+/* Total */
+h3 {
+    margin-top: 20px;
+    text-align: center;
+    color: orange;
+}
+
+/* Footer */
+footer {
+    margin-top: 50px;
+}
+
+footer .container {
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+/* Scroll smooth */
+html {
+    scroll-behavior: smooth;
+}
  </HEAD>
 
  <BODY>
