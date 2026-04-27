@@ -15,6 +15,7 @@
    <link rel="stylesheet" href="css/glyphicones.css">
     <link rel="stylesheet" href="css/styles.css">
    /* Reset بسيط */
+   <style>
 * {
     margin: 0;
     padding: 0;
@@ -137,6 +138,7 @@ footer .container {
 html {
     scroll-behavior: smooth;
 }
+</style>
  </HEAD>
 
  <BODY>
