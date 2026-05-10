@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Bag Store | Connexion</title>
+    <title>Fleurs de Saison - Signature Collection</title>
     
     <style>
-        /* إعدادات عامة بلمسة راقية */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
@@ -19,7 +18,6 @@
             justify-content: center;
         }
 
-        /* حاوية التسجيل بتصميم زجاجي عصري */
         .auth-container {
             background: rgba(255, 255, 255, 0.95);
             max-width: 420px;
@@ -35,7 +33,6 @@
             transform: translateY(-5px);
         }
 
-        /* العنوان */
         h2 {
             font-weight: 300;
             letter-spacing: 2px;
@@ -55,7 +52,7 @@
             margin: 10px auto;
         }
 
-        /* تنسيق النموذج */
+        
         form {
             display: flex;
             flex-direction: column;
@@ -86,7 +83,7 @@
             box-shadow: 0 0 0 4px rgba(0,0,0,0.02);
         }
 
-        /* زر الدخول الفخم */
+        
         .submit-btn {
             background: #1a1a1a;
             color: #fff;
@@ -103,12 +100,11 @@
         }
 
         .submit-btn:hover {
-            background: #d4af37; /* يتحول للذهبي عند التمرير */
+            background: #d4af37; 
             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
             transform: translateY(-2px);
         }
 
-        /* رابط العودة أو نسيت كلمة السر */
         .footer-links {
             margin-top: 20px;
             text-align: center;

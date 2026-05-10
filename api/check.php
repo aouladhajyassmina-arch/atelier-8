@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     
     if ($id_ === $id && $password_ === $password) {
-       
         $_SESSION['user'] = $id;          
         $_SESSION['logged_in'] = true;     
         

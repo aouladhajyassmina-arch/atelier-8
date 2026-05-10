@@ -25,7 +25,7 @@ if (isset($_POST['add_to_cart'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAG STORE | Collection Premium</title>
+    <title>Fleurs de Saison - Signature Collection</title>
     <style>
         /* التنسيق العام */
         body { 
@@ -199,7 +199,7 @@ if (isset($_POST['add_to_cart'])) {
             <!-- المنتج الأول -->
             <div class="card">
                 <div class="image-container">
-                    <img src="yass1.jpg" alt="Tulip Rose">
+                    <img src="images/tulip rose.jpg" alt="Tulip Rose">
                 </div>
                 <h3>Fleurs de Saison - Signature Collection</h3>
                 <p>150.00 DH</p>
@@ -207,7 +207,7 @@ if (isset($_POST['add_to_cart'])) {
                 <form method="POST">
                     <input type="hidden" name="nom" value="Fleurs de Saison - Signature Collection">
                     <input type="hidden" name="prix" value="250">
-                    <input type="hidden" name="image" value="yass1.jpg">
+                    <input type="hidden" name="image" value="images/tulip rose.jpg">
                     <button type="submit" name="add_to_cart">Ajouter au panier</button>
                 </form>
             </div>
@@ -215,7 +215,7 @@ if (isset($_POST['add_to_cart'])) {
              <!-- المنتج الأول -->
             <div class="card">
                 <div class="image-container">
-                    <img src="yass1.jpg" alt="Tulip Vert">
+                    <img src="images\tulip vert.jpg" alt="Tulip Vert">
                 </div>
                 <h3>Éclat Floral - Prestige Gold Edition</h3>
                 <p>200.00 DH</p>
@@ -223,14 +223,14 @@ if (isset($_POST['add_to_cart'])) {
                 <form method="POST">
                     <input type="hidden" name="nom" value="Éclat Floral - Prestige Gold Edition">
                     <input type="hidden" name="prix" value="250">
-                    <input type="hidden" name="image" value="yass1.jpg">
+                    <input type="hidden" name="image" value="images\tulip vert.jpg">
                     <button type="submit" name="add_to_cart">Ajouter au panier</button>
                 </form>
             </div>
              <!-- المنتج الأول -->
             <div class="card">
                 <div class="image-container">
-                    <img src="yass1.jpg" alt="Tulip noire">
+                    <img src="images\tulip noir.jpg" alt="Tulip noire">
                 </div>
                 <h3>L’Essentiel Floral - Minimal Edition</h3>
                 <p>150.00 DH</p>
@@ -238,14 +238,14 @@ if (isset($_POST['add_to_cart'])) {
                 <form method="POST">
                     <input type="hidden" name="nom" value="L’Essentiel Floral - Minimal Edition">
                     <input type="hidden" name="prix" value="250">
-                    <input type="hidden" name="image" value="yass1.jpg">
+                    <input type="hidden" name="image" value="images\tulip noir.jpg">
                     <button type="submit" name="add_to_cart">Ajouter au panier</button>
                 </form>
             </div>
            <!-- المنتج الأول -->
             <div class="card">
                 <div class="image-container">
-                    <img src="yass1.jpg" alt="Tulip noire">
+                    <img src="images\tulip bleu.jpg" alt="Tulip bleu">
                 </div>
                 <h3>L’Essentiel Floral - Minimal Edition</h3>
                 <p>150.00 DH</p>
@@ -253,14 +253,14 @@ if (isset($_POST['add_to_cart'])) {
                 <form method="POST">
                     <input type="hidden" name="nom" value="L’Essentiel Floral - Minimal Edition">
                     <input type="hidden" name="prix" value="250">
-                    <input type="hidden" name="image" value="yass1.jpg">
+                    <input type="hidden" name="image" value="images\tulip bleu.jpg">
                     <button type="submit" name="add_to_cart">Ajouter au panier</button>
                 </form>
             </div>
             <!-- المنتج الأول -->
             <div class="card">
                 <div class="image-container">
-                    <img src="yass1.jpg" alt="Tulip noire">
+                    <img src="images\tulip jeune.jpg" alt="Tulip jeune">
                 </div>
                 <h3>L’Essentiel Floral - Minimal Edition</h3>
                 <p>150.00 DH</p>
@@ -268,7 +268,22 @@ if (isset($_POST['add_to_cart'])) {
                 <form method="POST">
                     <input type="hidden" name="nom" value="L’Essentiel Floral - Minimal Edition">
                     <input type="hidden" name="prix" value="250">
-                    <input type="hidden" name="image" value="yass1.jpg">
+                    <input type="hidden" name="image" value="images\tulip jeune.jpg">
+                    <button type="submit" name="add_to_cart">Ajouter au panier</button>
+                </form>
+            </div>
+            <!-- المنتج الأول -->
+            <div class="card">
+                <div class="image-container">
+                    <img src="images\tulip blanche.jpg" alt="Tulip blanche">
+                </div>
+                <h3>L’Essentiel Floral - Minimal Edition</h3>
+                <p>150.00 DH</p>
+             
+                <form method="POST">
+                    <input type="hidden" name="nom" value="L’Essentiel Floral - Minimal Edition">
+                    <input type="hidden" name="prix" value="250">
+                    <input type="hidden" name="image" value="images\tulip blanche.jpg">
                     <button type="submit" name="add_to_cart">Ajouter au panier</button>
                 </form>
             </div>
@@ -276,7 +291,7 @@ if (isset($_POST['add_to_cart'])) {
             <!-- المنتج الثاني -->
             <div class="card">
                 <div class="image-container">
-                    <img src="images/téléchargement (24).jfif" alt="Tulip rouge">
+                    <img src="images/tulip rouge.jpg" alt="Tulip rouge">
                 </div>
                 <h3>L’Essentiel Floral - Minimal Edition</h3>
                 <p>100.00 DH</p>
@@ -284,7 +299,7 @@ if (isset($_POST['add_to_cart'])) {
                 <form method="POST">
                     <input type="hidden" name="nom" value="L’Essentiel Floral - Minimal Edition">
                     <input type="hidden" name="prix" value="320">
-                    <input type="hidden" name="image" value="images/téléchargement (24).jfif">
+                    <input type="hidden" name="image" value="images/tulip rouge.jpg">
                     <button type="submit" name="add_to_cart">Ajouter au panier</button>
                 </form>
             </div>
