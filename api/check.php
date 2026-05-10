@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // التحويل يجب أن يكون قبل أي echo أو HTML
         header("Location: store.php");
-        exit();
+        
     } else {
         $_SESSION['error'] = "Identifiant ou Mot de passe incorrect!";
         header("Location: index.php");
