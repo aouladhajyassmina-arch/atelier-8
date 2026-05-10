@@ -1,139 +1,217 @@
 <?php
-require_once 'Fruit.php';
-require_once 'Panier.php';
 session_start();
-
-// Protection de la page
-if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
+if (!isset($_SESSION['logged_in'])) {
+    header("Location: index.php");
     exit();
 }
 
-// Initialisation du panier si inexistant
-if (!isset($_SESSION['panier'])) {
-    $_SESSION['panier'] = new Panier();
-}
-
-$panier = $_SESSION['panier'];
-
-// Liste fictive de fruits (Normalement issue d'une BDD)
-$catalogue = [
-    new Fruit(1, "Pomme Gala", 2.50, "pomme.jpg"),
-    new Fruit(2, "Banane Bio", 1.80, "banane.jpg"),
-    new Fruit(3, "Poire Conférence", 3.20, "poire.jpg")
-];
-
-// Traitement Ajout
-if (isset($_POST['add'])) {
-    $id = $_POST['id'];
-    $qte = $_POST['quantite'];
-    $f = $catalogue[$id - 1]; 
-    $panier->ajouter($f, $qte);
-}
-
-// Traitement Suppression
 if (isset($_GET['del'])) {
-    $panier->supprimer($_GET['del']);
+    $index = $_GET['del'];
+    unset($_SESSION['panier'][$index]);
+    $_SESSION['panier'] = array_values($_SESSION['panier']);
+    header('Location: panier.php');
+    exit;
 }
-?>
 
+$total = 0;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fruit Store | Boutique</title>
+    <title>Votre Panier | BAG STORE</title>
     <style>
-        :root { --primary: #27ae60; --dark: #2c3e50; --light: #ecf0f1; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-        
-        /* Header */
-        header { background: white; padding: 1rem 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); sticky; top: 0; z-index: 100; }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { color: var(--primary); font-size: 1.5rem; font-weight: bold; }
-        .cart-link { text-decoration: none; color: var(--dark); font-weight: bold; }
-        .badge { background: var(--primary); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; }
+        /* إعدادات الفخامة العامة */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fcfcfc;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 40px 5%;
+        }
 
-        /* Grille de produits */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 30px; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 180px; object-fit: cover; }
-        .card-body { padding: 15px; text-align: center; }
-        
-        /* Formulaire */
-        input[type="number"] { width: 50px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; }
-        .btn { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
-        .btn-del { color: #e74c3c; text-decoration: none; font-size: 0.9rem; }
+        h1 {
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-        /* Panier */
-        .cart-section { margin-top: 50px; background: white; padding: 20px; border-radius: 12px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
-        
-        @media (max-width: 600px) {
-            .nav-links { font-size: 0.8rem; }
-            .grid { grid-template-columns: 1fr; }
+        /* زر الرجوع */
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #d4af37;
+            padding-bottom: 5px;
+            transition: 0.3s;
+        }
+
+        .back:hover {
+            color: #d4af37;
+            padding-left: 5px;
+        }
+
+        /* حاوية السلة */
+        .cart-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        /* تصميم صفوف المنتجات (بدل الجدول) */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .item-info img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            background: #f9f9f9;
+        }
+
+        .item-details h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .item-price {
+            color: #d4af37;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        /* زر الحذف الأنيق */
+        .delete {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #eee;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .delete:hover {
+            background: #ff4d4d;
+            color: #fff;
+            border-color: #ff4d4d;
+        }
+
+        /* القسم السفلي (المجموع) */
+        .cart-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-label {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .total-amount {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #1a1a1a;
+        }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #1a1a1a;
+            color: white;
+            padding: 18px;
+            margin-top: 30px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #d4af37;
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .empty-msg {
+            text-align: center;
+            padding: 50px;
+            color: #888;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <nav>
-            <div class="logo">🍎 FruitStore</div>
-            <div>
-                <a href="#panier" class="cart-link">🛒 Panier <span class="badge"><?= $panier->getCompte() ?></span></a>
-                <a href="logout.php" style="margin-left:15px; color: grey;">Déconnexion</a>
-            </div>
-        </nav>
-    </div>
-</header>
+    <a href="store.php" class="back">← Retour au Store</a>
+    
+    <h1>Votre Panier</h1>
 
-<div class="container">
-    <h2>Nos Produits</h2>
-    <div class="grid">
-        <?php foreach ($catalogue as $f): ?>
-        <div class="card">
-            <img src="images/<?= $f->getImage() ?>" alt="<?= $f->getNom() ?>">
-            <div class="card-body">
-                <h3><?= $f->getNom() ?></h3>
-                <p><?= number_format($f->getPrix(), 2) ?> €</p>
-                <form method="POST">
-                    <input type="hidden" name="id" value="<?= $f->getId() ?>">
-                    <input type="number" name="quantite" value="1" min="1">
-                    <button type="submit" name="add" class="btn">Ajouter</button>
-                </form>
+    <div class="cart-container">
+        <?php if (empty($_SESSION['panier'])): ?>
+            <div class="empty-msg">
+                <p>Votre panier est actuellement vide.</p>
+                <a href="store.php" style="color:#d4af37; text-decoration:none;">Commencer vos achats</a>
             </div>
-        </div>
-        <?php endforeach; ?>
-    </div>
+        <?php else: ?>
+            
+            <?php foreach ($_SESSION['panier'] as $index => $item): 
+                $total += $item['prix'];
+            ?>
+            <div class="cart-item">
+                <div class="item-info">
+                    <img src="<?= $item['image'] ?>" alt="<?= $item['nom'] ?>">
+                    <div class="item-details">
+                        <h3><?= $item['nom'] ?></h3>
+                        <div class="item-price"><?= number_format($item['prix'], 2) ?> DHS</div>
+                    </div>
+                </div>
+                <a href="panier.php?del=<?= $index ?>" class="delete">Supprimer</a>
+            </div>
+            <?php endforeach; ?>
 
-    <div id="panier" class="cart-section">
-        <h2>Mon Panier</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Fruit</th>
-                    <th>Prix</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($panier->getItems() as $index => $item): ?>
-                <tr>
-                    <td><?= $item->getNom() ?></td>
-                    <td><?= number_format($item->getPrix(), 2) ?> €</td>
-                    <td><a href="?del=<?= $index ?>" class="btn-del">Supprimer</a></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <h3 style="text-align: right;">Total : <?= number_format($panier->getTotal(), 2) ?> €</h3>
+            <div class="cart-footer">
+                <div class="total-label">Total</div>
+                <div class="total-amount"><?= number_format($total, 2) ?> DHS</div>
+            </div>
+
+            <a href="checkout.php" class="checkout-btn">Passer à la caisse</a>
+        <?php endif; ?>
     </div>
-</div>
 
 </body>
 </html>
