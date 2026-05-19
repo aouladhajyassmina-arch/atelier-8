@@ -224,6 +224,21 @@ if (isset($_POST['add_to_cart'])) {
                     <button type="submit" name="add_to_cart">Ajouter au panier</button>
                 </form>
             </div>
+              <!-- المنتج الأول -->
+            <div class="card">
+                <div class="image-container">
+                    <img src="images\tulip cut bleu.jpg" alt="Tulip Vert">
+                </div>
+                <h3>Éclat Floral - Prestige Gold Edition</h3>
+                <p>200.00 DH</p>
+             
+                <form method="POST">
+                    <input type="hidden" name="nom" value="Éclat Floral - Prestige Gold Edition">
+                    <input type="hidden" name="prix" value="250">
+                    <input type="hidden" name="image" value="images\tulip cut bleu.jpg">
+                    <button type="submit" name="add_to_cart">Ajouter au panier</button>
+                </form>
+            </div>
              <!-- المنتج الأول -->
             <div class="card">
                 <div class="image-container">
